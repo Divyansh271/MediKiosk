@@ -24,50 +24,39 @@
     <section class="screen active" id="home-screen">
       <div class="welcome-layout">
         <div class="welcome-copy">
-          <p class="eyebrow">Patient check-in</p>
-          <h1>Hello. Let’s get you ready for your consultation.</h1>
-          <p class="intro">You can speak or tap your answers. The clinician will review everything before it is used.</p>
+          <p class="eyebrow">Secure patient check-in</p>
+          <h1>Sign in with your ABHA profile.</h1>
+          <p class="intro">Choose a language, then verify your ABHA profile to begin. A one-click demo bypass is available in this prototype.</p>
           <div class="privacy-callout"><span>⌑</span><p><strong>Your visit is private.</strong><br />This prototype keeps information only for the active session.</p></div>
         </div>
         <article class="start-card">
-          <p class="step">Step 1 of 4</p>
-          <h2>Choose a language</h2>
+          <p class="step">Step 1 of 5</p>
+          <h2>ABHA authentication</h2>
           <label for="language">Interview language</label>
           <select id="language">
             <option>English</option><option>हिंदी (Hindi)</option><option>मराठी (Marathi)</option><option>தமிழ் (Tamil)</option><option>বাংলা (Bengali)</option><option>తెలుగు (Telugu)</option>
           </select>
-          <button class="primary-button wide" id="start-button" type="button">Start check-in <span>→</span></button>
+          <label for="login-abha">ABHA address or number</label>
+          <input id="login-abha" placeholder="e.g. 98-7654-3210-9876" inputmode="numeric" />
+          <button class="primary-button wide" id="verify-login" type="button">Verify ABHA <span>→</span></button>
+          <button class="secondary-button wide" id="bypass-login" type="button">Continue with demo profile</button>
           <button class="audio-button" id="welcome-audio" type="button">◖ Listen to this screen</button>
         </article>
       </div>
     </section>
 
     <section class="screen" id="identify-screen">
-      <div class="heading"><button class="back" data-screen="home" type="button">← Back</button><p class="step">Step 1 of 4</p><h1>Who is visiting today?</h1><p>Enter an ABHA number if you have one, or choose a profile for this prototype.</p></div>
+      <div class="heading"><button class="back" data-screen="home" type="button">← Back</button><p class="step">Step 2 of 5</p><h1>What kind of visit is this?</h1><p>Choose one option to tailor the intake questions.</p></div>
       <div class="single-column">
         <article class="card">
-          <label for="abha">ABHA address or number <small>Optional</small></label>
-          <div class="input-action"><input id="abha" placeholder="e.g. 98-7654-3210-9876" inputmode="numeric" /><button id="verify-abha" type="button">Verify</button></div>
-          <p class="hint" id="verify-message">You can continue without verifying an ABHA profile.</p>
-        </article>
-        <article class="card">
-          <h2>Choose the patient</h2>
-          <div class="profiles">
-            <button class="profile selected" data-name="Asha Sharma" type="button"><b class="coral">AS</b><span><strong>Asha Sharma</strong><small>Self</small></span><i>✓</i></button>
-            <button class="profile" data-name="Rohan Sharma" type="button"><b class="blue">RS</b><span><strong>Rohan Sharma</strong><small>Son</small></span><i>✓</i></button>
-            <button class="profile" data-name="Meera Sharma" type="button"><b class="gold">MS</b><span><strong>Meera Sharma</strong><small>Mother</small></span><i>✓</i></button>
-          </div>
-        </article>
-        <article class="card">
-          <h2>Is this a first visit?</h2>
-          <div class="two-buttons"><button class="option selected" data-visit="first" type="button"><strong>First visit</strong><small>Complete the full intake</small></button><button class="option" data-visit="returning" type="button"><strong>Returning visit</strong><small>Update what has changed</small></button></div>
+          <div class="two-buttons"><button class="option selected" data-visit="first" type="button"><strong>First-time visit</strong><small>Complete a guided intake</small></button><button class="option" data-visit="returning" type="button"><strong>Returning patient</strong><small>Update what has changed</small></button></div>
         </article>
         <button class="primary-button wide" id="continue-identify" type="button">Continue <span>→</span></button>
       </div>
     </section>
 
     <section class="screen" id="intake-screen">
-      <div class="heading with-progress"><button class="back" data-screen="identify" type="button">← Back</button><p class="step">Step 2 of 4 · Guided questions</p><h1 id="question-title">What brings you in today?</h1><p id="question-help">Choose the closest answer, or tell us in your own words.</p><div class="progress"><span id="progress-bar"></span></div><small id="question-count">Question 1 of 5</small></div>
+      <div class="heading with-progress"><button class="back" data-screen="identify" type="button">← Back</button><p class="step">Step 3 of 5 · Guided questions</p><h1 id="question-title">What brings you in today?</h1><p id="question-help">Choose the closest answer, or tell us in your own words.</p><div class="progress"><span id="progress-bar"></span></div><small id="question-count">Question 1 of 5</small></div>
       <div class="question-card card">
         <button class="speak-button" id="speak-question" type="button">◖ Listen to question</button>
         <button class="microphone" id="microphone" type="button"><span>⌁</span><strong id="mic-label">Tap to speak</strong><small>Voice input is optional</small></button>
@@ -79,17 +68,17 @@
     </section>
 
     <section class="screen" id="scan-screen">
-      <div class="heading"><button class="back" data-screen="intake" type="button">← Back</button><p class="step">Step 3 of 4</p><h1>Do you have an old prescription or report?</h1><p>You can add it now. This is optional.</p></div>
+      <div class="heading"><button class="back" data-screen="intake" type="button">← Back</button><p class="step">Step 4 of 5</p><h1>Do you have an old prescription or report?</h1><p>You can add it now. This is optional. MediKiosk only summarizes what it finds; it does not give medicine recommendations.</p></div>
       <div class="single-column scan-layout">
         <article class="scan-box card" id="scan-box"><span>▣</span><h2>Scan a document</h2><p>Select an image or PDF from this device.</p><label class="primary-button" for="upload">Choose a file <span>↑</span></label><input id="upload" type="file" accept="image/*,.pdf" hidden /><button class="link-button" id="sample-scan" type="button">Use sample prescription</button></article>
-        <article class="card hidden" id="scan-result"><p class="step">Document review</p><h2>We found these details</h2><div class="scanning"><span></span><strong id="scan-progress">Reading document…</strong></div><div class="extracted hidden" id="extracted"><p><small>Medicine</small><strong>Ashwagandha 500 mg</strong><em>Check</em></p><p><small>Medicine</small><strong>Levothyroxine 50 mcg</strong><em class="confirmed">Found</em></p><p><small>Finding</small><strong>Thyroid follow-up</strong><em>Check</em></p></div><div class="warning hidden" id="interaction"><b>!</b><p><strong>For clinician review</strong><br />Ashwagandha may affect thyroid treatment.</p></div></article>
+        <article class="card hidden" id="scan-result"><p class="step">Document review</p><h2>We found these details</h2><div class="scanning"><span></span><strong id="scan-progress">Reading document…</strong></div><div class="extracted hidden" id="extracted"><p><small>Medicine</small><strong>Ashwagandha 500 mg</strong><em>Check</em></p><p><small>Medicine</small><strong>Levothyroxine 50 mcg</strong><em class="confirmed">Found</em></p><p><small>Finding</small><strong>Thyroid follow-up</strong><em>Check</em></p></div><div class="warning hidden" id="interaction"><b>!</b><p><strong>For clinician review</strong><br />Two reported medicines need clinician review. No medicine recommendation is provided.</p></div></article>
         <div class="two-buttons"><button class="secondary-button" id="skip-scan" type="button">Skip for now</button><button class="primary-button disabled" id="continue-scan" type="button" disabled>Use these details <span>→</span></button></div>
       </div>
     </section>
 
     <section class="screen" id="consent-screen">
       <div class="consent-card card">
-        <div class="check-circle">✓</div><p class="step">Step 4 of 4</p><h1>Confirm before we create your draft</h1><p class="intro">The clinician will see a draft summary for today’s visit. Choose what you agree to share.</p>
+        <div class="check-circle">✓</div><p class="step">Step 5 of 5</p><h1>Confirm before we create your draft</h1><p class="intro">The clinician will see a draft summary for today’s visit. MediKiosk does not diagnose or recommend medicines. Choose what you agree to share.</p>
         <button class="audio-button bordered" id="consent-audio" type="button">◖ Listen in <span id="consent-language">English</span></button>
         <div class="consents"><label><input type="checkbox" checked id="summary-consent" /><span><strong>Today’s clinical summary</strong><small>Symptoms, answers and clinician notes for this visit.</small></span></label><label><input type="checkbox" checked /><span><strong>Scanned document details</strong><small>Medicines or findings from a record you added.</small></span></label><label><input type="checkbox" /><span><strong>Relevant family profile information</strong><small>Only if it may help today’s consultation.</small></span></label></div>
         <p class="delete-note">⌫ After routing, this kiosk session will be cleared.</p>
