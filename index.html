@@ -9,6 +9,19 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
+  <style>
+    .visit-heading { position: relative; }
+    .case-history-button { position: absolute; right: 0; top: 0; border: 1px solid #9fc1be; background: #fff; color: #075d5b; border-radius: 8px; padding: 9px 12px; font: 700 12px "DM Sans", sans-serif; cursor: pointer; }
+    .case-history-button:hover { background: #e7f4f2; }
+    .history-modal article { max-width: 560px; }
+    .history-list { display: grid; gap: 9px; margin: 18px 0; }
+    .history-case { border: 1px solid #d7e4e3; background: #fff; border-radius: 9px; padding: 12px; text-align: left; color: #17383a; cursor: pointer; }
+    .history-case:hover, .history-case.selected { border-color: #0d7774; background: #f4faf9; }
+    .history-case strong, .history-case small { display: block; }
+    .history-case small { color: #62797b; font-size: 11px; margin-top: 2px; }
+    .history-note { color: #62797b; font-size: 12px; }
+    @media (max-width: 720px) { .case-history-button { position: static; margin-top: 15px; } }
+  </style>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -46,7 +59,7 @@
     </section>
 
     <section class="screen" id="identify-screen">
-      <div class="heading"><button class="back" data-screen="home" type="button">← Back</button><p class="step">Step 2 of 5</p><h1>What kind of visit is this?</h1><p>Choose one option to tailor the intake questions.</p></div>
+      <div class="heading visit-heading"><button class="back" data-screen="home" type="button">← Back</button><p class="step">Step 2 of 5</p><h1>What kind of visit is this?</h1><p>Choose one option to tailor the intake questions.</p><button class="case-history-button" id="view-cases" type="button">▤ View older cases</button></div>
       <div class="single-column">
         <article class="card">
           <div class="two-buttons"><button class="option selected" data-visit="first" type="button"><strong>First-time visit</strong><small>Complete a guided intake</small></button><button class="option" data-visit="returning" type="button"><strong>Returning patient</strong><small>Update what has changed</small></button></div>
@@ -97,6 +110,7 @@
   </main>
 
   <div class="modal hidden" id="triage-modal" role="dialog" aria-modal="true" aria-labelledby="triage-title"><article><span>!</span><p class="step">Priority check</p><h2 id="triage-title">These symptoms may need urgent attention.</h2><p>Please tell a staff member now. In a live system, this would alert the clinic queue.</p><button class="primary-button" id="close-triage" type="button">Continue</button></article></div>
+  <div class="modal history-modal hidden" id="history-modal" role="dialog" aria-modal="true" aria-labelledby="history-title"><article><span class="success">▤</span><p class="step">ABHA record history</p><h2 id="history-title">Earlier cases</h2><p class="history-note">Select a previous case to load its clinician-reviewed baseline. The returning-patient interview will ask only for what has changed.</p><div class="history-list"><button class="history-case" data-case="18 Aug 2026 · Thyroid follow-up"><strong>18 Aug 2026 · Thyroid follow-up</strong><small>Clinician-confirmed summary · 2 reported medicines</small></button><button class="history-case" data-case="08 Jul 2026 · Seasonal cough"><strong>08 Jul 2026 · Seasonal cough</strong><small>Clinician-confirmed summary · no scan attached</small></button><button class="history-case" data-case="22 May 2026 · Digestive concern"><strong>22 May 2026 · Digestive concern</strong><small>Clinician-confirmed summary · AYUSH context recorded</small></button></div><button class="text-button" id="close-history" type="button">Close</button></article></div>
   <div class="modal hidden" id="route-modal" role="dialog" aria-modal="true" aria-labelledby="route-title"><article><span class="success">✓</span><p class="step">Routing complete</p><h2 id="route-title">The draft is ready for consultation.</h2><p id="fhir-text">FHIR handoff simulated for the selected health profile.</p><button class="primary-button wide" id="clear-session" type="button">Clear kiosk session <span>⌫</span></button></article></div>
   <div class="toast-area" id="toast-area" aria-live="polite"></div>
   <script src="script.js"></script>
