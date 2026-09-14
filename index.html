@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0d7774" />
+  <title>MediKiosk | Prototype</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="topbar">
+    <a class="brand" href="#home" aria-label="MediKiosk home"><b>+</b> Medi<span>Kiosk</span></a>
+    <div class="top-actions">
+      <button class="connection" id="connection" type="button"><i></i><span id="connection-label">Connected</span></button>
+      <button class="icon-button" id="accessibility" type="button" aria-label="Increase text size">A<span>+</span></button>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="screen active" id="home-screen">
+      <div class="welcome-layout">
+        <div class="welcome-copy">
+          <p class="eyebrow">Patient check-in</p>
+          <h1>Hello. Let’s get you ready for your consultation.</h1>
+          <p class="intro">You can speak or tap your answers. The clinician will review everything before it is used.</p>
+          <div class="privacy-callout"><span>⌑</span><p><strong>Your visit is private.</strong><br />This prototype keeps information only for the active session.</p></div>
+        </div>
+        <article class="start-card">
+          <p class="step">Step 1 of 4</p>
+          <h2>Choose a language</h2>
+          <label for="language">Interview language</label>
+          <select id="language">
+            <option>English</option><option>हिंदी (Hindi)</option><option>मराठी (Marathi)</option><option>தமிழ் (Tamil)</option><option>বাংলা (Bengali)</option><option>తెలుగు (Telugu)</option>
+          </select>
+          <button class="primary-button wide" id="start-button" type="button">Start check-in <span>→</span></button>
+          <button class="audio-button" id="welcome-audio" type="button">◖ Listen to this screen</button>
+        </article>
+      </div>
+    </section>
+
+    <section class="screen" id="identify-screen">
+      <div class="heading"><button class="back" data-screen="home" type="button">← Back</button><p class="step">Step 1 of 4</p><h1>Who is visiting today?</h1><p>Enter an ABHA number if you have one, or choose a profile for this prototype.</p></div>
+      <div class="single-column">
+        <article class="card">
+          <label for="abha">ABHA address or number <small>Optional</small></label>
+          <div class="input-action"><input id="abha" placeholder="e.g. 98-7654-3210-9876" inputmode="numeric" /><button id="verify-abha" type="button">Verify</button></div>
+          <p class="hint" id="verify-message">You can continue without verifying an ABHA profile.</p>
+        </article>
+        <article class="card">
+          <h2>Choose the patient</h2>
+          <div class="profiles">
+            <button class="profile selected" data-name="Asha Sharma" type="button"><b class="coral">AS</b><span><strong>Asha Sharma</strong><small>Self</small></span><i>✓</i></button>
+            <button class="profile" data-name="Rohan Sharma" type="button"><b class="blue">RS</b><span><strong>Rohan Sharma</strong><small>Son</small></span><i>✓</i></button>
+            <button class="profile" data-name="Meera Sharma" type="button"><b class="gold">MS</b><span><strong>Meera Sharma</strong><small>Mother</small></span><i>✓</i></button>
+          </div>
+        </article>
+        <article class="card">
+          <h2>Is this a first visit?</h2>
+          <div class="two-buttons"><button class="option selected" data-visit="first" type="button"><strong>First visit</strong><small>Complete the full intake</small></button><button class="option" data-visit="returning" type="button"><strong>Returning visit</strong><small>Update what has changed</small></button></div>
+        </article>
+        <button class="primary-button wide" id="continue-identify" type="button">Continue <span>→</span></button>
+      </div>
+    </section>
+
+    <section class="screen" id="intake-screen">
+      <div class="heading with-progress"><button class="back" data-screen="identify" type="button">← Back</button><p class="step">Step 2 of 4 · Guided questions</p><h1 id="question-title">What brings you in today?</h1><p id="question-help">Choose the closest answer, or tell us in your own words.</p><div class="progress"><span id="progress-bar"></span></div><small id="question-count">Question 1 of 5</small></div>
+      <div class="question-card card">
+        <button class="speak-button" id="speak-question" type="button">◖ Listen to question</button>
+        <button class="microphone" id="microphone" type="button"><span>⌁</span><strong id="mic-label">Tap to speak</strong><small>Voice input is optional</small></button>
+        <div class="answers" id="answers"></div>
+        <label for="other-answer">Or add a detail</label><textarea id="other-answer" rows="2" placeholder="Type your answer here"></textarea>
+        <div class="question-actions"><button class="text-button" id="previous-question" type="button">← Previous</button><button class="primary-button" id="next-question" type="button">Continue <span>→</span></button></div>
+      </div>
+      <button class="safety-note" id="safety-note" type="button"><b>!</b> If you have chest pain, severe breathing difficulty, or feel unsafe, tell a staff member now.</button>
+    </section>
+
+    <section class="screen" id="scan-screen">
+      <div class="heading"><button class="back" data-screen="intake" type="button">← Back</button><p class="step">Step 3 of 4</p><h1>Do you have an old prescription or report?</h1><p>You can add it now. This is optional.</p></div>
+      <div class="single-column scan-layout">
+        <article class="scan-box card" id="scan-box"><span>▣</span><h2>Scan a document</h2><p>Select an image or PDF from this device.</p><label class="primary-button" for="upload">Choose a file <span>↑</span></label><input id="upload" type="file" accept="image/*,.pdf" hidden /><button class="link-button" id="sample-scan" type="button">Use sample prescription</button></article>
+        <article class="card hidden" id="scan-result"><p class="step">Document review</p><h2>We found these details</h2><div class="scanning"><span></span><strong id="scan-progress">Reading document…</strong></div><div class="extracted hidden" id="extracted"><p><small>Medicine</small><strong>Ashwagandha 500 mg</strong><em>Check</em></p><p><small>Medicine</small><strong>Levothyroxine 50 mcg</strong><em class="confirmed">Found</em></p><p><small>Finding</small><strong>Thyroid follow-up</strong><em>Check</em></p></div><div class="warning hidden" id="interaction"><b>!</b><p><strong>For clinician review</strong><br />Ashwagandha may affect thyroid treatment.</p></div></article>
+        <div class="two-buttons"><button class="secondary-button" id="skip-scan" type="button">Skip for now</button><button class="primary-button disabled" id="continue-scan" type="button" disabled>Use these details <span>→</span></button></div>
+      </div>
+    </section>
+
+    <section class="screen" id="consent-screen">
+      <div class="consent-card card">
+        <div class="check-circle">✓</div><p class="step">Step 4 of 4</p><h1>Confirm before we create your draft</h1><p class="intro">The clinician will see a draft summary for today’s visit. Choose what you agree to share.</p>
+        <button class="audio-button bordered" id="consent-audio" type="button">◖ Listen in <span id="consent-language">English</span></button>
+        <div class="consents"><label><input type="checkbox" checked id="summary-consent" /><span><strong>Today’s clinical summary</strong><small>Symptoms, answers and clinician notes for this visit.</small></span></label><label><input type="checkbox" checked /><span><strong>Scanned document details</strong><small>Medicines or findings from a record you added.</small></span></label><label><input type="checkbox" /><span><strong>Relevant family profile information</strong><small>Only if it may help today’s consultation.</small></span></label></div>
+        <p class="delete-note">⌫ After routing, this kiosk session will be cleared.</p>
+        <div class="question-actions"><button class="text-button" data-screen="scan" type="button">← Go back</button><button class="primary-button" id="make-draft" type="button">Create draft <span>→</span></button></div>
+      </div>
+    </section>
+
+    <section class="screen" id="review-screen">
+      <div class="heading review-heading"><p class="step">Clinician review</p><h1>Clinical summary draft</h1><p>This draft is not a diagnosis. A clinician must review it before it is routed.</p><span class="draft-pill">Draft · review required</span></div>
+      <div class="review-grid">
+        <article class="summary-card card"><div class="patient-line"><div><small>Patient</small><h2 id="summary-name">Asha Sharma</h2><p id="summary-meta">ABHA not verified · English</p></div><b>MEDI<br />KIOSK</b></div><div id="summary-content"></div><label for="clinician-note">Clinician amendment</label><textarea id="clinician-note" rows="3" placeholder="Add a clarification before confirming"></textarea></article>
+        <aside class="route-card card"><h2>Choose an action</h2><p>All highlighted details should be checked with the patient.</p><button class="primary-button wide" id="route-summary" type="button">Accept and route <span>→</span></button><button class="secondary-button wide" id="return-intake" type="button">Return for clarification</button><button class="reject-button" id="reject-draft" type="button">Reject draft</button><hr /><small><b>Confidence labels</b><br /><i class="dot green"></i> Confirmed &nbsp; <i class="dot amber"></i> Check &nbsp; <i class="dot purple"></i> Inferred</small></aside>
+      </div>
+      <section class="simple-operations"><h2>Clinic operations</h2><p>Anonymous session markers for staff.</p><div><article><small>Completed today</small><strong id="completed-count">24</strong></article><article><small>Waiting for review</small><strong id="review-count">6</strong></article><article><small>Priority markers</small><strong id="priority-count">2</strong></article><article><small>Offline queue</small><strong id="offline-count">0</strong></article></div></section>
+    </section>
+  </main>
+
+  <div class="modal hidden" id="triage-modal" role="dialog" aria-modal="true" aria-labelledby="triage-title"><article><span>!</span><p class="step">Priority check</p><h2 id="triage-title">These symptoms may need urgent attention.</h2><p>Please tell a staff member now. In a live system, this would alert the clinic queue.</p><button class="primary-button" id="close-triage" type="button">Continue</button></article></div>
+  <div class="modal hidden" id="route-modal" role="dialog" aria-modal="true" aria-labelledby="route-title"><article><span class="success">✓</span><p class="step">Routing complete</p><h2 id="route-title">The draft is ready for consultation.</h2><p id="fhir-text">FHIR handoff simulated for the selected health profile.</p><button class="primary-button wide" id="clear-session" type="button">Clear kiosk session <span>⌫</span></button></article></div>
+  <div class="toast-area" id="toast-area" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
